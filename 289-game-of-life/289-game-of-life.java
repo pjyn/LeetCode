@@ -1,5 +1,4 @@
 class Solution {
-    // private int[][] dir = new int[][]{{-1, -1}, {-1, 0}, {-1, +1}, {0, -1}, {0, +1}, {+1, -1}, {+1, 0}, {+1, +1}};    
     
     private int[][] dir = new int[][]{{0,1}, {1,0}, {-1, 0}, {0,-1},{-1,-1},{-1,1},{1,-1},{1,1}};
     
@@ -19,9 +18,7 @@ class Solution {
                     if(tmp < 2 || tmp > 3){
                         board[i][j] = -2;
                     }
-                    // else if(tmp == 2 || tmp == 3){
-                    //     board[i][j] = 3;
-                    // }
+            
                 }else if(board[i][j] == 0){
                     int tmp = helper(i, j, board, row, col);
                     if(tmp == 3){
@@ -47,13 +44,7 @@ class Solution {
     private int helper(int i, int j, int[][] board, int row, int col){
         
         int active = 0;
-//         if(i < 0 || j < 0 || i >= row || j >= col || board[i][j] == 0){
-//             return 0;
-//         }
-        
-//         if(board[i][j] == 1){
-//             active++;
-//         }
+
         for(int[] direction: dir){
             
             int newRow = i+direction[0];
