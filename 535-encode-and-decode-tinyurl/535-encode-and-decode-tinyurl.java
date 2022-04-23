@@ -1,32 +1,16 @@
 public class Codec {
 
-    Map<String, String> hm = new HashMap<>(), urlDB = new HashMap<>();
-    static final String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    
-    private String getCode(){
-        char[] code = new char[6];
-        for(int i=0; i<6; i++)
-            code[i] = chars.charAt((int)Math.random() * 62);
-        return "http://tinyurl.com/" + String.valueOf(code);
-    }
+    Map<String, String> map = new HashMap<>();
     
     public String encode(String longUrl) {
-    
-        if(urlDB.containsKey(longUrl))
-            return urlDB.get(longUrl);
-        
-        String code = getCode();
-        while(hm.containsKey(code)){
-            code = getCode();
-        }
-        hm.put(code, longUrl);
-        urlDB.put(longUrl, code);
-        return code;
+        String key = "http://LC/"+map.size();
+        map.put(key, longUrl);
+        return key;
     }
 
-    
+    // Decodes a shortened URL to its original URL.
     public String decode(String shortUrl) {
-        return hm.get(shortUrl);
+        return map.get(shortUrl);
     }
 }
 
