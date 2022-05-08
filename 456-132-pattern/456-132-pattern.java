@@ -11,6 +11,7 @@ class Solution {
                 return true;
             
             while(!st.isEmpty() && nums[i] > st.peek()){
+             
                 secondMax = Math.max(secondMax, st.pop());
             }
             st.push(nums[i]);
