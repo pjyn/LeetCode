@@ -11,9 +11,9 @@ class Solution {
             graph[i] = new ArrayList<>();
         }
         
-        for(List<Integer> connection: connections){
-            graph[connection.get(0)].add(connection.get(1));
-            graph[connection.get(1)].add(connection.get(0));
+        for(List<Integer> c: connections){
+            graph[c.get(0)].add(c.get(1));
+            graph[c.get(1)].add(c.get(0));
         }
         
         List<List<Integer>> ans = new ArrayList<>();
