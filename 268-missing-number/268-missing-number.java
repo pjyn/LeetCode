@@ -2,21 +2,17 @@ class Solution {
     public int missingNumber(int[] nums) {
         
         Arrays.sort(nums);
+        int totalSum = 0;
+        int runningSum = 0;
         
-        // [0, 1, 2]
-        int i = 0;
-        boolean isOk = false;
-        
-        while(i < nums.length){
-            if(nums[i] != i){
-                isOk = true;
-                return i;
+        for(int i=0; i<nums.length; i++){
+            if(i != 0){
+                totalSum += i;
             }
-            i++;
+            runningSum += nums[i];
         }
-        if(!isOk){
-            return nums.length;
-        }
-        return 0;
+        totalSum += nums.length;
+        System.out.println(runningSum+"\t"+totalSum);
+        return totalSum - runningSum;
     }
 }
