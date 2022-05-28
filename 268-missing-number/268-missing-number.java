@@ -12,7 +12,7 @@ class Solution {
             runningSum += nums[i];
         }
         totalSum += nums.length;
-        System.out.println(runningSum+"\t"+totalSum);
+    
         return totalSum - runningSum;
     }
 }
