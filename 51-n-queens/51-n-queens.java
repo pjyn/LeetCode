@@ -7,14 +7,14 @@ class Solution {
             dy != 0
             dx != dy
         */
+        
         result = new ArrayList<>();
         char[][] board = new char[n][n];
         
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                board[i][j] = '.';
-            }
+        for(char[] a: board){
+            Arrays.fill(a, '.');    
         }
+        
         
         List<int[]> queens = new ArrayList<>();
         dfs(board, 0, queens);
@@ -49,8 +49,7 @@ class Solution {
             int dy = Math.abs(c-a[1]);
             if(dx == 0 || dy == 0 || dx == dy){
                 return false;
-            }
-            
+            }    
         }
         return true;
     }
