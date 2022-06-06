@@ -12,43 +12,27 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         
-        ListNode lA = headA;
-        ListNode lB = headB;
+        if(headA == null || headB == null)
+            return null;
         
-        while(lA != null && lB != null){
+        ListNode a_pointer = headA;
+        ListNode b_pointer = headB;
+        
+        while(a_pointer != b_pointer){
             
-            if(lA == lB){
-                return lA;
+            if(a_pointer != null){
+                a_pointer = a_pointer.next;
+            }else{
+                a_pointer = headB;
             }
-            lA = lA.next;
-            lB = lB.next;
+            
+            if(b_pointer != null){
+                b_pointer = b_pointer.next;
+            }else{
+                b_pointer = headA;
+            }
         }
-        if(lA == null){
-            lA = headB;
-            while(lB != null){
-                lB = lB.next;    
-                lA = lA.next;
-            }
-            lB = headA;
-            while(lA != lB){
-                lA = lA.next;
-                lB = lB.next;
-            }
-            return lA;
-        }
-        if(lB == null){
-            lB = headA;
-            while(lA != null){
-                lA = lA.next;    
-                lB = lB.next;
-            }
-            lA = headB;
-            while(lA != lB){
-                lA = lA.next;
-                lB = lB.next;
-            }
-            return lA;
-        }
-        return null;
+        
+        return a_pointer;
     }
 }
