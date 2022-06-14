@@ -31,7 +31,7 @@ class Solution{
             return "1";
             
         StringBuilder sb = new StringBuilder();
-        String s = lookandsay(n-1) + "0";     // 5, 4, 3, 2, 1
+        String s = lookandsay(n-1) + " ";     // 5, 4, 3, 2, 1
         
         for(int i=0, count=1; i<s.length()-1; i++, count++){
             if(s.charAt(i+1) != s.charAt(i)){
@@ -40,20 +40,5 @@ class Solution{
             }
         }
         return sb.toString();
-        
-        /*
-            static String lookandsay(int n) {
-        if(n == 1) return "1";
-        StringBuilder res = new StringBuilder();
-        String s = lookandsay(n-1) + "0"; 
-        for(int i=0, count=1; i < s.length()-1; i++, count++){
-            if(s.charAt(i+1) != s.charAt(i)){
-                res.append(count).append(s.charAt(i));
-                count=0;
-            }
-        }
-    return res.toString();      
-   }
-        */
     }
 }
