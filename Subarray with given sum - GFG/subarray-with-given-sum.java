@@ -35,17 +35,18 @@ class Solution
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
     {
         ArrayList<Integer> res = new ArrayList<>();
-        int currSum = arr[0], start = 0, i;
+        
+        int left=0, i;
+        int currSum = arr[0];
         
         for(i=1; i<=n; i++){
-            
-            while(currSum > s && start < i-1){
-                currSum = currSum - arr[start];
-                start++;
+            while(currSum > s && left < i-1){       // it don't cross
+                currSum -= arr[left];
+                left++;
             }
             
             if(currSum == s){
-                res.add(start+1);
+                res.add(left+1);
                 res.add(i);
                 return res;
             }
@@ -53,7 +54,7 @@ class Solution
                 currSum += arr[i];
             }
         }
-        if(res.size() == 0){
+        if(res.size()==0){
             res.add(-1);
         }
         return res;
