@@ -14,30 +14,30 @@
  * }
  */
 class Solution {
-    int cam = 0;
+    int cam;
     public int minCameraCover(TreeNode root) {
-        
-        return dfs(root)==0 ? cam+1 : cam;
+        return dfs(root) == 0 ? cam+1: cam;
     }
     /*
-        2-> Has Camera
-        1-> Covered with camera
-        0-> not covered with camera
+        2-> has camera
+        1-> covered by Camera
+        0-> not covered by camera
     */
-    public int dfs(TreeNode node){
+    private int dfs(TreeNode node){
         if(node == null)
             return 1;
+        
         int left = dfs(node.left);
         int right = dfs(node.right);
-        // check if we need a camera
+        
         if(left == 0 || right == 0){
             cam++;
-            return 2;
+            return 2;       // now they have camera
         }else if(left == 2 || right == 2){
-            return 1;
+            return 1;       // covered by camera
         }else{
-            return 0;
+            return 0;       // require camera.
         }
-            
+
     }
 }
