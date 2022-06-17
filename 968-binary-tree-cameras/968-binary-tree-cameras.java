@@ -14,33 +14,30 @@
  * }
  */
 class Solution {
-    int cam;
-    Set<TreeNode> covered;
-    
+    int cam = 0;
     public int minCameraCover(TreeNode root) {
-     
-        if(root == null)
-            return 0;
-        cam = 0;
-        covered = new HashSet<>();
-        covered.add(null);
-        dfs(root, null);
-        return cam;
+        
+        return dfs(root)==0 ? cam+1 : cam;
     }
-    
-    public void dfs(TreeNode node, TreeNode parent){
-        if(node != null){
-            dfs(node.left, node);
-            dfs(node.right, node);
-            
-            if(parent == null && !covered.contains(node) || !covered.contains(node.left) ||
-              !covered.contains(node.right) ){
-                cam++;
-                covered.add(node);
-                covered.add(parent);
-                covered.add(node.left);
-                covered.add(node.right);
-            }
+    /*
+        2-> Has Camera
+        1-> Covered with camera
+        0-> not covered with camera
+    */
+    public int dfs(TreeNode node){
+        if(node == null)
+            return 1;
+        int left = dfs(node.left);
+        int right = dfs(node.right);
+        // check if we need a camera
+        if(left == 0 || right == 0){
+            cam++;
+            return 2;
+        }else if(left == 2 || right == 2){
+            return 1;
+        }else{
+            return 0;
         }
+            
     }
 }
