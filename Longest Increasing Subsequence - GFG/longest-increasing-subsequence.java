@@ -42,23 +42,23 @@ class Solution
     static int longestSubsequence(int size, int a[])
     {
         int[][] dp = new int[a.length][a.length];
-        return rec(-1, 0, a, dp);
+        return rec(a, -1, 0, dp);
     }
-    
-    private static int rec(int prev, int curr, int nums[], int dp[][]){
-        if(curr == nums.length)
+    private static int  rec(int[] a, int prev, int curr, int[][] dp){
+        if(curr == a.length){
             return 0;
-            
+        }
+        
         if(prev != -1 && dp[prev][curr] != 0){
             return dp[prev][curr];
         }
         
         int op1 = 0;
-        if(prev == -1 || nums[prev] < nums[curr]){
-            op1 = 1 + rec(curr, curr+1, nums, dp);
+        if(prev == -1 || a[prev] < a[curr]){
+            op1 = 1 + rec(a, curr, curr+1, dp);
         }
-        int op2 = rec(prev, curr+1, nums, dp);
         
+        int op2 = rec(a, prev, curr+1, dp);
         if(prev != -1){
             dp[prev][curr] = Math.max(op1, op2);
         }
