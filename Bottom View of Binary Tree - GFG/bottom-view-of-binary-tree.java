@@ -121,31 +121,25 @@ class Solution
     //Function to return a list containing the bottom view of the given tree.
     public ArrayList <Integer> bottomView(Node root)
     {
-        Queue<Pair> q = new ArrayDeque<>();
+        
         Map<Integer, Integer> hm = new TreeMap<>();
         
+        Queue<Pair> q = new ArrayDeque<>();
         q.add(new Pair(0, root));
+        
         while(!q.isEmpty()){
-    
+            
             Pair curr = q.poll();
             hm.put(curr.hd, curr.node.data);
-            // levelOrder.add(curr.data);
-            // if(!hm.containsKey(curr.hd)){
-            //     hm.put(curr.hd, curr.node.data);
-            // }
-                /*
-                     0-> 1
-                    -1-> 3
-                     1-> 2
-                */
+            
             if(curr.node.left != null){
                 q.add(new Pair(curr.hd-1, curr.node.left));
             }
             if(curr.node.right != null){
                 q.add(new Pair(curr.hd+1, curr.node.right));
             }
+            
         }
-    
         ArrayList<Integer> ans = new ArrayList<>();
         for(Map.Entry<Integer, Integer> entry: hm.entrySet()){
             ans.add(entry.getValue());
@@ -157,8 +151,8 @@ class Solution
         Node node;
         
         public Pair(int hd, Node node){
-            this.node = node;
             this.hd = hd;
+            this.node = node;
         }
     }
 }
