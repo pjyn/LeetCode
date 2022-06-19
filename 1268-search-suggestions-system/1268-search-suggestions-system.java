@@ -1,31 +1,31 @@
 class Solution {
     public List<List<String>> suggestedProducts(String[] products, String searchWord) {
-        
+     
         List<List<String>> ans = new ArrayList<>();
-        
         Arrays.sort(products);
         
-        TreeMap<String, Integer> map = new TreeMap<>();
+        TreeMap<String, Integer> tm = new TreeMap<>();
         
-        List<String> productsList = Arrays.asList(products);
-        
+        List<String> productList = Arrays.asList(products);
+            
         for(int i=0; i<products.length; i++){
-            map.put(products[i], i);
+            tm.put(products[i], i);
         }
         
-        String key = "";
+        String s = "";
         for(char c: searchWord.toCharArray()){
-            key += c;
-            String ceiling = map.ceilingKey(key);
-            String floor = map.floorKey(key + "{");
+            s += c;
+            String ceiling = tm.ceilingKey(s);
+            String floor = tm.floorKey(s + "{");
             
-            if(ceiling == null || floor == null)
+            if (ceiling == null || floor == null)
                 break;
             
-            ans.add(productsList.subList(map.get(ceiling), Math.min(map.get(ceiling)+3, map.get(floor)+1)));
+            ans.add(productList.subList(tm.get(ceiling), Math.min(tm.get(ceiling)+3, tm.get(floor)+1)));
         }
         while(ans.size() < searchWord.length())
             ans.add(new ArrayList<>());
         return ans;
+                    
     }
 }
