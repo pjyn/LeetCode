@@ -130,9 +130,9 @@ class Solution
             Pair curr = q.poll();
             hm.put(curr.hd, curr.node.data);
             // levelOrder.add(curr.data);
-            if(!hm.containsKey(curr.hd)){
-                hm.put(curr.hd, curr.node.data);
-            }
+            // if(!hm.containsKey(curr.hd)){
+            //     hm.put(curr.hd, curr.node.data);
+            // }
                 /*
                      0-> 1
                     -1-> 3
