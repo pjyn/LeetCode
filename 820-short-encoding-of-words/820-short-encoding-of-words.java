@@ -20,7 +20,7 @@ class Solution {
             }
         }
         int cnt = 0;
-        for(String s: hs){
+        for(String s: wordList){
             if(!duplicate.contains(s)){
                 cnt += s.length() + 1;
             }
