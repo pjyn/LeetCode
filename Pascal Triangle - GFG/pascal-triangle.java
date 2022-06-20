@@ -32,23 +32,27 @@ class GFG {
 class Solution {
     ArrayList<Long> nthRowOfPascalTriangle(int n) {
         
-        ArrayList<Long> op = new ArrayList<>();
-        op.add(1L);
-        return get(n, op);
-    }
-    
-    ArrayList<Long> get(int n, ArrayList<Long> op){
-        if(n == 1)
-            return op;
-        else{
-            ArrayList<Long> br = new ArrayList<>();
-            for(int i=0, j=1; i<op.size()-1 && j<op.size(); i++, j++){
-                br.add( (op.get(i) + op.get(j))%1000000007);
-            }
-            br.add(0, 1L);
-            br.add(1L);
-            op = br;
-            return get(n-1, op);
+        ArrayList<ArrayList<Long>> res = new ArrayList<>();
+        
+        if(n == 0){
+            return new ArrayList<Long>();
         }
+            
+        ArrayList<Long> firstRow = new ArrayList<>();
+        firstRow.add(1L);
+        res.add(firstRow);
+        
+        for(int i=1; i<n; i++){
+            ArrayList<Long> tmp = res.get(i-1);
+            ArrayList<Long> row = new ArrayList<>();
+            
+            for(int j=1; j<i; j++){
+                row.add( (tmp.get(j-1)+tmp.get(j)) % 1000000007 );
+            }
+            row.add(0, 1L);
+            row.add(1L);
+            res.add(row);
+        }
+        return res.get(n-1);
     }
 }
