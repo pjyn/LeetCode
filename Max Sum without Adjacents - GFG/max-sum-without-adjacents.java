@@ -32,24 +32,23 @@ public class Main {
 class Solution {
     int findMaxSum(int arr[], int n) {
         // code here
-        /*
-            [5, 5, 10, 100, 10, 5]
-            
-        */
         int[] dp = new int[n];
+        
         rec(arr, n-1, dp);
         return dp[n-1];
     }
-    private int rec(int[] arr, int index, int[] dp){
-        
-        if(index < 0){
+    private int rec(int[] arr, int i, int[] dp){
+        if(i < 0){
             return 0;
         }
-        if(dp[index] != 0){
-            return dp[index];
+        
+        if(dp[i] != 0){
+            return dp[i];
         }
-        int op1 = arr[index] + rec(arr, index-2, dp);
-        int op2 = rec(arr, index-1, dp);
-        return dp[index] = Math.max(op1, op2);
+        
+        int op1 = arr[i] + rec(arr, i-2, dp);
+        int op2 = rec(arr, i-1, dp) ;
+        return dp[i] = Math.max(op1, op2);
+        
     }
 }
