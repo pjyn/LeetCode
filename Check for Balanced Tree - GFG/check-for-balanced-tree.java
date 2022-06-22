@@ -134,19 +134,18 @@ class Tree
     {
 	    if(root == null)
 	        return true;
-	    
 	    return height(root) != -1;
     }
-    
-    private int height(Node node){
-        if(node == null)
+    private int height(Node curr){
+        if(curr == null){
             return 0;
-        int left = height(node.left);
-        int right = height(node.right);
-        int balanceFactor = Math.abs(left-right);
-        
-        if(balanceFactor > 1 || left == -1 || right == -1)
+        }
+        int left = height(curr.left);
+        int right = height(curr.right);
+        int bf = Math.abs(left - right);
+        if(bf > 1 || left == -1 || right == -1){
             return -1;
+        }
         return 1 + Math.max(left, right);
     }
 }
