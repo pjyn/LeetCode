@@ -1,36 +1,32 @@
 class Solution {
     public boolean isPossible(int[] target) {
-        
         PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)-> (b-a));
         
         long totalSum = 0l;
         for(int i: target){
-            pq.offer(i);
             totalSum += i;
+            pq.offer(i);
         }
-        // totalSum = 17
-        // [9, 5, 3]
         
         while(!pq.isEmpty()){
-            int maxEle = pq.poll();     // [1, 3, 5] -> 5
+            int maxEle = pq.poll();     // 9
             
-            long remainingSum = totalSum - maxEle;       // 17 - 9 => 8      ; 9-5 => 4
+            long remainingSum = totalSum - maxEle;      // 17-9 => 8
             
-            if(maxEle == 1 || remainingSum == 1){
+            if(remainingSum == 1 || maxEle == 1){
                 return true;
             }
             
-            if(remainingSum == 0 || maxEle < remainingSum ){
+            if(remainingSum == 0 || maxEle < remainingSum){
                 return false;
             }
             
-            int newNumberToBeAdded = (int)(maxEle % remainingSum);
-                
-            if(newNumberToBeAdded == 0)
+            if(maxEle%remainingSum == 0){
                 return false;
-            
-            totalSum = remainingSum + newNumberToBeAdded;
-            pq.offer(newNumberToBeAdded);
+            }
+            int numberToBeAdded = (int)(maxEle % remainingSum); // 9 % 8 = 1
+            pq.offer(numberToBeAdded);
+            totalSum = remainingSum + numberToBeAdded;
         }
         return true;
     }
