@@ -34,20 +34,19 @@ class Solution
 {
     public static int wordBreak(String A, ArrayList<String> B )
     {
-        int n = A.length();
-        boolean[] dp = new boolean[n+1];
-        dp[n] = true;
+        //code here
+        boolean[] dp = new boolean[A.length()+1];
+        dp[A.length()] = true;
         
-        for(int i=n-1; i>=0; i--){
-            for(String s: B){
-                if(i+s.length() <= n && A.substring(i, i+s.length()).equals(s) ){
-                    dp[i] = dp[i + s.length()];
+        for(int i=A.length()-1; i>=0; i--){
+            for(String word: B){
+                if(i+word.length() <= A.length() && A.substring(i, i+word.length()).equals(word)){
+                    dp[i] = dp[i+word.length()];
                 }
-                if(dp[i] == true){
+                if(dp[i])
                     break;
-                }
             }
         }
-        return dp[0] == true ? 1 : 0;
+        return dp[0] == false ? 0 : 1;
     }
 }
