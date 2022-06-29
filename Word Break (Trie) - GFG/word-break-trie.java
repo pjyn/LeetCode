@@ -39,12 +39,13 @@ class Solution
         dp[A.length()] = true;
         
         for(int i=A.length()-1; i>=0; i--){
-            for(String word: B){
-                if(i+word.length() <= A.length() && A.substring(i, i+word.length()).equals(word)){
-                    dp[i] = dp[i+word.length()];
+            for(String s: B){
+                if(i+s.length() <= A.length() && A.substring(i, i+s.length()).equals(s)){
+                    dp[i] = dp[i+s.length()];
                 }
-                if(dp[i])
+                if(dp[i]){
                     break;
+                }
             }
         }
         return dp[0] == false ? 0 : 1;
