@@ -1,19 +1,20 @@
 class Solution {
     public int minMoves2(int[] nums) {
         
-        List<Integer> r = new ArrayList<>();
+        // List<Integer> r = new ArrayList<>();
         
-        for(int i: nums){
-            r.add(i);
-        }
+        Arrays.sort(nums);
+        // for(int i: nums){
+        //     r.add(i);
+        // }
         
-        Collections.sort(r);
+        // Collections.sort(r);
         // [1, 2, 3]
-        int size = r.size();
-        int median = r.get(size/2);
+        int size = nums.length;
+        int median = nums[size/2];
         
         int ans = 0;
-        for(int i: r){
+        for(int i: nums){
             ans += Math.abs(i-median);
         }
         return ans;
