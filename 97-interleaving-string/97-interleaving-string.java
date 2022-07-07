@@ -16,7 +16,7 @@ class Solution {
     }
     
     private boolean rec(String s1, int i, String s2, int j, String s3, int k){
-        int hash = i*s3.length() + j;
+        int hash = j*s3.length() + i;
         if(vis.contains(hash))
             return false;
         
