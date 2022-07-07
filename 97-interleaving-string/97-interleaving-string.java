@@ -1,34 +1,35 @@
 class Solution {
+    Set<Integer> vis;
     public boolean isInterleave(String s1, String s2, String s3) {
+     
+        int l1 = s1.length();
+        int l2 = s2.length();
+        int l3 = s3.length();
         
-        int len1 = s1.length();
-        int len2 = s2.length();
-        int len3 = s3.length();
+        if(l1+l2 != l3){
+            return false;
+        }
         
-        if((len1+len2)!=len3)
+        vis = new HashSet<>();
+        
+        return rec(s1, 0, s2, 0, s3, 0);
+    }
+    
+    private boolean rec(String s1, int i, String s2, int j, String s3, int k){
+        int hash = i*s3.length() + j;
+        if(vis.contains(hash))
             return false;
         
-        boolean[][] dp = new boolean[len2+1][len1+1];
-        dp[0][0] = true;
+        if(i == s1.length())
+            return s2.substring(j).equals(s3.substring(k));
         
-        for(int j=1; j<dp[0].length; j++){
-            // left             first check if character's are matching 
-            dp[0][j] = dp[0][j-1] && (s1.charAt(j-1)==s3.charAt(j-1));  
-        }
+        if(j == s2.length())
+            return s1.substring(i).equals(s3.substring(k));
         
-        for(int i=1; i<dp.length; i++){
-            //up            
-            dp[i][0] = dp[i-1][0] && (s2.charAt(i-1)==s3.charAt(i-1));
-        }
+        if(s3.charAt(k) == s1.charAt(i) && rec(s1, i+1, s2, j, s3, k+1) || s3.charAt(k) == s2.charAt(j) && rec(s1, i, s2, j+1, s3, k+1))
+            return true;
         
-        for(int i=1; i<dp.length; i++){
-            for(int j=1; j<dp[0].length; j++){
-                
-                dp[i][j] = (dp[i-1][j]&&(s2.charAt(i-1)==s3.charAt(i+j-1))) ||  //sum of character index a,  bc=> 3
-                        
-                            (dp[i][j-1] && (s1.charAt(j-1)==s3.charAt(i+j-1)));
-            }
-        }
-        return dp[len2][len1];
+        vis.add(hash);
+        return false;
     }
 }
