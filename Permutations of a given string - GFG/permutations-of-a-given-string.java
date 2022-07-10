@@ -31,28 +31,30 @@ class Solution {
     public List<String> find_permutation(String S) {
         // Code here
         res = new ArrayList<String>();
-        rec(0, S.toCharArray());
-        Collections.sort(res);
-        return res;
-    }   
-    private void rec(int index, char[] S){       // [0, "", ['A', 'B', 'C']]
         
-        if(index >= S.length){
-            String str = String.valueOf(S);
-            if(!res.contains(str))
-                res.add(str);
+        // boolean[] vis = new boolean[26];
+        
+        rec(0, S.toCharArray());        // ['A', 'B', 'C']
+        Collections.sort(res);  
+        return res;
+    }
+    private void rec(int index, char[] str){
+        if(index >= str.length){
+            String tmp = String.valueOf(str);
+            if(!res.contains(tmp))
+                res.add(tmp);
             return ;
         }
         
-        for(int i=0; i<S.length; i++){
-            swap(index, i, S);   // [A, A]
-            rec(index+1, S);
-            swap(index, i, S);
+        for(int i=0; i<str.length; i++){
+            swap(index, i, str);
+            rec(index+1, str);
+            swap(index, i, str);
         }
     }
-    private void swap(int a, int b, char[] S){
-        char tmp = S[a];
-        S[a] = S[b];
-        S[b] = tmp;
+    private void swap(int a, int b, char[] str){
+        char tmp = str[a];
+        str[a] = str[b];
+        str[b] = tmp;
     }
 }
