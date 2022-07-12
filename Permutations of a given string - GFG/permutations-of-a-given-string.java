@@ -27,34 +27,33 @@ class GFG
 
 
 class Solution {
-    ArrayList<String> res;
     public List<String> find_permutation(String S) {
-        // Code here
-        res = new ArrayList<String>();
+        List<String> res = new ArrayList<>();
         
-        // boolean[] vis = new boolean[26];
-        
-        rec(0, S.toCharArray());        // ['A', 'B', 'C']
-        Collections.sort(res);  
+        rec(S.toCharArray(), 0, res);
+        Collections.sort(res);
         return res;
     }
-    private void rec(int index, char[] str){
-        if(index >= str.length){
-            String tmp = String.valueOf(str);
-            if(!res.contains(tmp))
+    private void rec(char[] S, int idx, List<String> res){
+        
+        if(idx >= S.length){
+            String tmp = String.valueOf(S);
+            if(!res.contains(tmp)){
                 res.add(tmp);
+            }
             return ;
         }
         
-        for(int i=0; i<str.length; i++){
-            swap(index, i, str);
-            rec(index+1, str);
-            swap(index, i, str);
+        for(int i=0; i<S.length; i++){
+            swap(S, idx, i);
+            rec(S, idx+1, res);
+            swap(S, idx, i);
         }
+        
     }
-    private void swap(int a, int b, char[] str){
-        char tmp = str[a];
-        str[a] = str[b];
-        str[b] = tmp;
+    private void swap(char[] s, int idx, int i){
+        char tmp = s[idx];
+        s[idx] = s[i];
+        s[i] = tmp;
     }
 }
