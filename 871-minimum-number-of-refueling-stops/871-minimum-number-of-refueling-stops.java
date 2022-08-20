@@ -1,6 +1,38 @@
 class Solution {
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
         
+        int xCurrent = startFuel;
+        int req = 0;
+        
+        // Max-Heap 
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b)-> (b-a));
+        
+        for(int[] station: stations){
+            
+            int nextStation = station[0];
+            int fuelAtStation = station[1];
+            
+            while(xCurrent < nextStation){  // exhausted all fuel;
+                if(!pq.isEmpty()){
+                    int fuel = pq.poll();
+                    xCurrent += fuel;
+                    req++;
+                }else{
+                    return -1;
+                }
+            }
+            pq.offer(fuelAtStation);
+        }
+        while(xCurrent < target){
+            if(!pq.isEmpty()){
+                int fuel = pq.poll();
+                xCurrent += fuel;
+                req++;
+            }else{
+                return -1;
+            }
+        }
+        return req;
         // [10, 60], [20, 30], [30, 30], [60, 40]
         
         /*
@@ -63,22 +95,5 @@ class Solution {
                 
 //         }
 //         return req;
-        if (startFuel >= target) return 0;
-        Queue<Integer> queue = new PriorityQueue<>((a,b) -> b-a);
-        
-        int i = 0, n = stations.length, stops = 0, maxDistance = startFuel;
-        
-        while (maxDistance < target) {
-            
-            while (i < n && stations[i][0] <= maxDistance) {
-                
-                queue.offer(stations[i++][1]);
-            }
-            if (queue.isEmpty()) return -1;
-            
-            maxDistance += queue.poll();
-            stops++;
-        }
-        return stops;
     }
 }
