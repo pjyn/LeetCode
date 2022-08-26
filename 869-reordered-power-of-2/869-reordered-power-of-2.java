@@ -1,35 +1,33 @@
 class Solution {
     public boolean reorderedPowerOf2(int n) {
-     
-        int[] inputDigitFreq = freqCount(n);
+        
+        int[] freqNumbers = freq(n);
         
         for(int i=0; i<31; i++){
-            
-            int powerOf2 = (int)Math.pow(2, i);
-            int[] powerOf2FreqCount = freqCount(powerOf2);
-            if(compareArray(inputDigitFreq, powerOf2FreqCount)){
+            int tmp = (int)Math.pow(2, i);
+            int[] arr = freq(tmp);
+            if(isValid(arr, freqNumbers)){
                 return true;
             }
         }
         return false;
     }
-    private boolean compareArray(int[] freqCount1, int[] freqCount2){
-        boolean match = true;
-        
-        for(int i=0; i<10; i++){
-            if(freqCount1[i] != freqCount2[i]){
+    private boolean isValid(int[] arr, int[] freqNumbers){
+        for(int i=0; i<9; i++){
+            if(arr[i] != freqNumbers[i]){
                 return false;
             }
         }
         return true;
     }
     
-    private int[] freqCount(int n){
-        int[] digitFreq = new int[10];
+    private int[] freq(int n){
+        int[] count = new int[10];
+        
         while(n > 0){
-            digitFreq[n%10]++;
-            n = n/10;
+            count[n%10]++;
+            n /= 10;
         }
-        return digitFreq;
+        return count;
     }
 }
