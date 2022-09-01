@@ -18,6 +18,7 @@ class Solution {
         
         return dfs(root, root.val);
     }
+    
     private int dfs(TreeNode curr, int maxVal){
         
         if(curr == null)
