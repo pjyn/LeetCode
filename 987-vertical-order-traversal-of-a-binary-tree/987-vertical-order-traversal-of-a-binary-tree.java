@@ -11,6 +11,9 @@
  *         this.left = left;
  *         this.right = right;
  *     }
+ -1, 1->   9
+  0, 0->   3
+    
  * }
  */
 class Solution {
@@ -18,18 +21,17 @@ class Solution {
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         
         tm = new TreeMap<>();
-        dfs(root, 0, 0);
         List<List<Integer>> res = new ArrayList<>();
-        
-        for(TreeMap<Integer, PriorityQueue<Integer>> tmp: tm.values()){
-            res.add(new ArrayList<>());
+        dfs(root, 0, 0);
+        for(TreeMap<Integer, PriorityQueue<Integer>>tmp: tm.values()){
+            List<Integer> rt = new ArrayList<>();
             for(PriorityQueue<Integer> pq: tmp.values()){
                 while(!pq.isEmpty()){
-                    res.get(res.size()-1).add(pq.poll());
+                    rt.add(pq.poll())   ;
                 }
             }
+            res.add(rt);
         }
-        
         return res;
     }
     private void dfs(TreeNode curr, int x, int y){
@@ -42,6 +44,7 @@ class Solution {
         if(!tm.get(x).containsKey(y)){
             tm.get(x).put(y, new PriorityQueue<>());
         }
+        
         tm.get(x).get(y).offer(curr.val);
         dfs(curr.left, x-1, y+1);
         dfs(curr.right, x+1, y+1);
