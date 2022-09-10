@@ -17,14 +17,11 @@ class Solution {
         
         int[][] dp = new int[k+1][n];
         for(int i=1; i<=k; i++){
+            int localMax = dp[i-1][0] - prices[0];
             for(int j=1; j<n; j++){             // dp
                 
-                int not_sell = dp[i][j-1];
-                int sell = 0;
-                for(int m=0; m<j; m++){
-                    sell = Math.max(sell, (prices[j] - prices[m]) + dp[i-1][m]);
-                }
-                dp[i][j] = Math.max(sell, not_sell);
+                dp[i][j] = Math.max(dp[i][j-1], prices[j] + localMax);
+                localMax = Math.max(localMax, dp[i-1][j] - prices[j]);
             }
         }
         return dp[k][n-1];
