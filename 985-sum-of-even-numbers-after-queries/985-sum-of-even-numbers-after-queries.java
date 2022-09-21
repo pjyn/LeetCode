@@ -9,24 +9,22 @@ class Solution {
                 even_sum += val;
             }
         }
-        // even_sum = 6
         
         for(int i=0; i<queries.length; i++){
-            int index = queries[i][1];      // 0
-            int value = queries[i][0];      // 1
+            int index = queries[i][1];
+            int value = queries[i][0];
             
-            if(nums[index] % 2 == 0){           // 1%2
+            if(nums[index] % 2 == 0){       // 
                 even_sum -= nums[index];
             }
             
-            nums[index] += value;           // 1 + 1
+            nums[index] += value;
             if(nums[index] % 2 == 0){
-                even_sum += nums[index];        // 6 += 2 => 8
+                even_sum += nums[index];
             }
             
             output_arr[i] = even_sum;
         }
-        
         return output_arr;
     }
 }
