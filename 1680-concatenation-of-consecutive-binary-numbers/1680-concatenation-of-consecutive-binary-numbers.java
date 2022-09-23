@@ -1,8 +1,9 @@
 class Solution {
     public int concatenatedBinary(int n) {
         
-        // 168421
-        // 1 1011
+        // 16 8 4 2 1
+        // 1  1 0 1 1
+        
         int newNo = 0;
         int mod = 1000000007;
         
