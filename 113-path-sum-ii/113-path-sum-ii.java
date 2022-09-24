@@ -15,30 +15,31 @@
  */
 class Solution {
     Stack<Integer> st = new Stack<>();
-    List<List<Integer>> output = new ArrayList<>();
-    
+    List<List<Integer>> res;
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
         
-        if(root == null){
-            return output;
-        }
+        res = new ArrayList<>();
+        if(root == null)
+            return res;
         dfs(root, targetSum);
-        return output;
+        return res;
     }
     
-    private void dfs(TreeNode curr, int sum){
+    private void dfs(TreeNode curr, int targetSum){
+        
         st.push(curr.val);
-            
+        
         if(curr.left == null && curr.right == null){
-            if(sum == curr.val){
-                output.add(new ArrayList<Integer>(st));
+            if(targetSum == curr.val){
+                res.add(new ArrayList<>(st));
             }
         }
+        
         if(curr.left != null){
-            dfs(curr.left, sum-curr.val);
+            dfs(curr.left, targetSum-curr.val);
         }
         if(curr.right != null){
-            dfs(curr.right, sum-curr.val);
+            dfs(curr.right, targetSum-curr.val);
         }
         st.pop();
     }
