@@ -14,32 +14,36 @@
  * }
  */
 class Solution {
-    Stack<Integer> st = new Stack<>();
-    boolean ans = false;
+    Stack<Integer> st;
+    boolean isValid;
     public boolean hasPathSum(TreeNode root, int targetSum) {
         
         if(root == null)
             return false;
         
+        st = new Stack<>();
+        isValid = false;
         dfs(root, targetSum);
-        return ans;
+        return isValid;
     }
-    private void dfs(TreeNode curr, int target){
+    
+    private void dfs(TreeNode curr, int targetSum){
         st.push(curr.val);
         
         if(curr.left == null && curr.right == null){
-            if(curr.val == target){
-                ans = true;
+            if(targetSum == curr.val){
+                isValid = true;
                 return ;
             }
         }
         
         if(curr.left != null){
-            dfs(curr.left, target-curr.val);
+            dfs(curr.left, targetSum - curr.val);
         }
         if(curr.right != null){
-            dfs(curr.right, target-curr.val);
+            dfs(curr.right, targetSum - curr.val);
         }
+        
         st.pop();
     }
 }
