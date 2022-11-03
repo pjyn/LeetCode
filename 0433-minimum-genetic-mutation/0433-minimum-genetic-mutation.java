@@ -1,29 +1,31 @@
-class Solution{
-    public int minMutation(String start, String end, String[] bank) {
+class Solution {
+    public int minMutation(String startGene, String endGene, String[] bank) {
         
-        recurse(start, end, bank, 0, new HashSet<String>());
-        return count == Integer.MAX_VALUE ? -1 : count;
-    }    
-    int count = Integer.MAX_VALUE;
-    private void recurse(String start, String end, String[] bank, int soFar, Set<String> visited) {
-        if(start.intern() == end.intern()) {
-            count = Math.min(count, soFar);
-        }
-    
-        for(String e : bank) {
-            int diff = 0;
-            for(int i = 0; i < e.length(); i++) {
-                if(start.charAt(i) != e.charAt(i)) {
-                    diff++;
-                    if(diff > 1) break;
+        char[] c = new char[]{'A', 'C', 'G', 'T'};
+        Queue<String> q = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        int count = 0;
+        q.add(startGene);
+        visited.add(startGene);
+        while(!q.isEmpty()){
+            int size = q.size();
+            while(size--> 0){
+                String tmp = q.poll();
+                if(tmp.equals(endGene)){
+                    return count;
+                }
+                for(char ele: c){
+                    for(int i=0; i<8; i++){
+                        String tmpstring = tmp.substring(0, i) + ele + tmp.substring(i+1);
+                        if(!visited.contains(tmpstring) && Arrays.asList(bank).contains(tmpstring)){
+                            q.add(tmpstring);
+                            visited.add(tmpstring);
+                        }
+                    }
                 }
             }
-            if(diff == 1 && !visited.contains(e)) {
-                visited.add(e);
-                recurse(e, end, bank, soFar+1, visited);
-                visited.remove(e);
-            }
+            count++;
         }
+        return -1;
     }
 }
-
